@@ -1,0 +1,88 @@
+<%- include('header'); -%>
+<main>
+    <% if (prods.length > 0) { %>
+        <div class="grid">
+            <% for (let product of prods) { %>
+                <article class="card mx-2 my-4" style="width: 18rem;display:inline-flex;height:33em">
+                    <img style="height: 250px;" class="card-img-top"src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                    <div class="card-body">
+                        <header class="card-title">
+                            <h4 class="product__title">
+                                <%= product.title %>
+                            </h4>
+                        </header>
+                        <div class="card-text">
+                            <h3 class="product__price">₹
+                                <%= product.price %>
+                            </h3>
+                            <p class="card-text">
+                            <strong>Description:</strong> <%= product.description %>
+                            </p>
+                            <p class="card-text">
+                              Seller: <%= product.userId.username %>
+                            </p>
+                        </div>
+                        
+                    </div>
+                   
+                    <div class="card-footer">
+                        <a href="/edit-product/<%=product._id%>?edit=true" class="btn  btn-warning">Edit</a>
+
+                            <input type="hidden" value="<%=product._id%>" name="productId">
+                            <input type="hidden" value="<%=csrfToken%>" name="_csrf">
+
+                            <button class="btn  btn-danger" type="button" onclick="deleteProduct(this)">Delete</button>
+
+
+                    </div>
+                       
+                
+                   
+                </article>
+            <% } %>
+        </div>
+    <% } else { %>
+        <div class="card">
+<div class="card-body">
+    <div role="main" class="inner cover">
+        <h1 class="cover-heading">No Products Found.</h1>
+        <p class="lead">You might want to add some products to begin with.</p>
+        <p class="lead">
+          <a href="/add-product" class="btn btn-lg btn-secondary">Add here</a>
+        </p>
+      </div>
+</div>
+        </div>
+       
+    <% } %>
+</main>
+<script>
+    const deleteProduct = btn => {
+  const prodId = btn.parentNode.querySelector('[name=productId]').value;
+  const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
+
+  const productElement = btn.closest('article');
+
+  fetch('/product/' + prodId, {
+    method: 'DELETE',
+    headers: {
+      'csrf-token': csrf
+    }
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log(data);
+      productElement.parentNode.removeChild(productElement);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+</script>
+<%- include('scripts'); -%>
+</body>
+
+</html>

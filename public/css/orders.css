@@ -1,0 +1,39 @@
+.orders {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+    background-color: white;
+    width:500px;
+    align-content: center;
+
+
+
+}
+.centered2
+{
+    text-align: -webkit-center;
+}
+.orders__item h1 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.orders__item {
+  box-shadow: 10px 6px 20px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.orders__products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.orders__products-item {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #fbca16;
+    color: darkolivegreen;
+}

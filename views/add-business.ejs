@@ -1,0 +1,43 @@
+<%- include('header'); -%>
+<div class="container">
+   
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+            
+          <div class="card-body">
+          
+            <h5 class="card-title text-center">Add Business</h5>
+            <% if(errorMessage){%>
+                <div class="alert alert-danger"><%=errorMessage%></div>
+                <%}%>
+            <form class="form-signin" action="/business" method="POST" >
+                <div class="form-label-group">
+                    <input class="<%=validationErrors.find(e=>e.param==='name')?'invalid':''%> form-control"
+                        type="text" name="name" id="name" value="" required autofocus>
+                    <label for="name">Business Name</label>
+                  </div>
+              <div class="form-label-group">
+                <input class="<%=validationErrors.find(e=>e.param==='email')?'invalid':''%> form-control"
+                    type="email" name="email" id="email" value="" required>
+                <label for="email">Business Email</label>
+              </div>
+
+              <div class="form-label-group">
+                 <input class="<%=validationErrors.find(e=>e.param==='registrationNo')?'invalid':''%> form-control"
+                   type="text" name="registrationNo" id="registrationNo" value="" required>
+                <label for="password">Resgistration Number</label>
+              </div>
+              <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Business</button>
+         </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('scripts'); -%>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<%- include('header'); -%>
+<div class="container">
+   
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+            
+          <div class="card-body">
+          
+            <h5 class="card-title text-center">Sign Up</h5>
+            <% if(errorMessage){%>
+                <div class="alert alert-danger"><%=errorMessage%></div>
+                <%}%>
+            <form class="form-signin" action="/signup" method="POST" enctype="multipart/form-data">
+                <div class="form-label-group">
+                    <input class="<%=validationErrors.find(e=>e.param==='name')?'invalid':''%> form-control"
+                        type="text" name="name" id="name" value="<%=oldInput.name%>" required autofocus>
+                    <label for="name">Username</label>
+                  </div>
+              <div class="form-label-group">
+                <input class="<%=validationErrors.find(e=>e.param==='email')?'invalid':''%> form-control"
+                    type="email" name="email" id="email" value="<%=oldInput.email%>" required>
+                <label for="email">Email address</label>
+              </div>
+
+              <div class="form-label-group">
+                 <input class="<%=validationErrors.find(e=>e.param==='password')?'invalid':''%> form-control"
+                   type="password" name="password" id="password" value="<%=oldInput.password%>" required>
+                <label for="password">Password</label>
+              </div>
+              <div class="form-label-group">
+                <input class="<%=validationErrors.find(e=>e.param==='confirmPassword')?'invalid':''%> form-control"
+                  type="password" name="confirmPassword" id="confirmPassword" value="<%=oldInput.confirmPassword%>" required>
+               <label for="password">Confirm Password</label>
+             </div>
+             <div class="file-upload-wrapper form-label-group custom-file">
+              <input type="file" name="image" id="image" class="file-upload form-control custom-file-input" />
+              <label class="custom-file-label" for="image">Choose file</label>
+            </div>
+              <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+         </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('scripts'); -%>
+<script>
+  $('.file-upload').file_upload();
+</script>
+</body>
+
+</html>
